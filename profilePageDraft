@@ -1,0 +1,53 @@
+@{
+/**
+* ---------------------------------------------------------------------------
+* File name: Profile.cshtml
+* Project name: 404 Industries BucHunt
+* ---------------------------------------------------------------------------
+* Author’s name: Josh Pitts
+* Creation Date: Nov 15, 2022
+* Last modified: Josh Pitts Nov 29, 2022
+* ---------------------------------------------------------------------------
+*/
+}
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+<div class="text-center"> 
+    <h2>@ViewData["Title"]</h2>
+    <body>
+        @using (Html.BeginForm("Index", "Hunt"))
+        {
+            <br />
+            <br />
+               <img id="beechCorner" alt="Profile picture" />
+            <br />
+
+            <input type="file" id="beechCorner" />
+            <br>
+            <input type="button" value="Save changes" id="save" />
+            <script>
+            document.getElementById("beechCorner").onchange = function() {
+              if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                  // e.target.result is a base64-encoded url that contains the image data
+                  document.getElementById('beechCorner').setAttribute('src', e.target.result);
+                };
+                reader.readAsDataURL(this.files[0]);
+              }
+            </script>
+
+            <br />
+            <h3>Username</h3>
+            @Html.TextBox("Access", "")
+            <br />
+            <input type="submit" value="submit"/>
+        }     
+    </body>
+</div> 
+
+add this button to the index page.
+<input type="submit"
+       value="Edit Profile"
+       onclick="location.href='@Url.Action("Profile", "Home")'" />
